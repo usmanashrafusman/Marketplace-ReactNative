@@ -12,12 +12,12 @@ const getHeaders = async (file) => {
   if (file) {
     return {
       "Content-Type": "multipart/form-data",
-      token: await getToken(),
+      "authorization-token": await getToken(),
     };
   }
   return {
     "Content-Type": "application/json",
-    token: await getToken(),
+    "authorization-token": await getToken(),
   };
 };
 
@@ -29,11 +29,24 @@ const call = async (api, data, file) => {
     formData.append("email", data.email);
     formData.append("password", data.password);
     if (data.image.length) {
+      // if (data.image.length > 1) {
+      //   const images = [];
+      //   data.image.forEach((image, index) => {
+      //     const imageObj = {
+      //       name: `images0${index}`,
+      //       type: "image/jpeg",
+      //       uri: image,
+      //     };
+      //     images.push(imageObj);
+      //   });
+      //   formData.append("file", images);
+      // } else {
       formData.append("file", {
         name: "images",
         type: "image/jpeg",
         uri: data.image[0],
       });
+      // }
     }
     data = formData;
   } else {
