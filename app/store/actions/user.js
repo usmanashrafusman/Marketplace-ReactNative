@@ -12,9 +12,7 @@ export const loginUser = createAsyncThunk(
   "loginUser",
   async (data, thunkAPI) => {
     try {
-      console.log(data);
       const response = await HttpService.call(api.login(), data);
-      console.log(response, "From Action");
       if (response.authtoken) {
         await setToken(response.authtoken);
       }
@@ -39,3 +37,12 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
+export const getUser = createAsyncThunk("getUser", async (thunkAPI) => {
+  try {
+    const response = await HttpService.call(api.getUser());
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});

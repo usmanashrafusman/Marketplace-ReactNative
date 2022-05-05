@@ -11,7 +11,6 @@ const useLocation = () => {
       const {
         coords: { latitude, longitude },
       } = await Location.getCurrentPositionAsync({});
-      console.log({ latitude, longitude });
       setLocation({ latitude, longitude });
     } catch (error) {
       return error;
