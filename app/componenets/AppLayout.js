@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet } from "react-native";
 import { getUser } from "../store/actions/user";
 import { NavigationContainer } from "@react-navigation/native";
 import navigationTheme from "../navigation/navigationTheme";
@@ -13,11 +12,7 @@ const AppLayout = () => {
 
   useEffect(() => {
     dispatch(getUser());
-  }, [dispatch]);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  }, []);
 
   return (
     <NavigationContainer theme={navigationTheme}>
@@ -25,14 +20,5 @@ const AppLayout = () => {
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default AppLayout;
